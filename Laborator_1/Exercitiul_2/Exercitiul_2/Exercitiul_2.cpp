@@ -17,7 +17,7 @@ int main() {
     }
 
 
-    for (int i = 0; i < n - 1; i++) {
+    for (int i = 0; i < n - 1; i++) { // sortare lungime
         for (int j = 0; j < n - i - 1; j++) {
             if (strlen(word_list[j]) < strlen(word_list[j + 1])) {
                 char aux[40];
@@ -28,6 +28,16 @@ int main() {
         }
     }
 
+    for (int i = 0; i < n - 1; i++) { // sortare lexicografica
+        for (int j = 0; j < n - i - 1; j++) {
+            if (strlen(word_list[j]) == strlen(word_list[j + 1]) && strcmp(word_list[j], word_list[j+1]) > 0) {
+                char aux[40];
+                strcpy(aux, word_list[j]);
+                strcpy(word_list[j], word_list[j + 1]);
+                strcpy(word_list[j + 1], aux);
+            }
+        }
+    }
 
     for (int i = 0; i < n; i++) {
         printf("%s\n", word_list[i]);
