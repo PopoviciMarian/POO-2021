@@ -1,9 +1,7 @@
 
 #include <iostream>
 #include "NumberList.h"
-int main()
-{
-    
+int main(){
     NumberList list;
     list.Init();
     list.Add(3);
