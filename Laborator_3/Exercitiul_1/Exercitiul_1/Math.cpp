@@ -44,5 +44,6 @@ char* Math::Add(const char* s1, const char* s2) {
 	if (!result) return nullptr;
 	memcpy(result, s1, strlen(s1));
 	memcpy(result + strlen(s1), s2, strlen(s2) + 1);
+	result[strlen(s1) + strlen(s2)] = 0;
 	return result;
 }
