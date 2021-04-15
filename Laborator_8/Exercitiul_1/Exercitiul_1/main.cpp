@@ -16,7 +16,6 @@ public:
 		}
 		return t1.second < t2.second;
 	}
-
 };
 
 void readTextFromFile(std::string &text) {
@@ -28,17 +27,18 @@ void readTextFromFile(std::string &text) {
 		[](unsigned char c) { return std::tolower(c); });
 }
 
-
 std::map<std::string, int> splitTextAndCreateWordsMap(std::string text){
 	std::map<std::string, int> words;
-	char* token = strtok((char*)(text.c_str()), " ,?!.");
-	while (token != NULL){
-		if (words.find(token) == words.end()) {
-			words.insert(std::pair<std::string, int>(token, 1));
-		}else{
-			words.at(token)++;
+	std::string const delims{" ,?!."};
+	size_t beg, pos = 0;
+	while ((beg = text.find_first_not_of(delims, pos)) != std::string::npos){
+		pos = text.find_first_of(delims, beg + 1);
+		if (words.find(text.substr(beg, pos - beg)) == words.end()) {
+			words.insert(std::pair<std::string, int>(text.substr(beg, pos - beg), 1));
 		}
-		token = strtok(NULL, " ,?!.");
+		else{
+			words.at(text.substr(beg, pos - beg))++;
+		}
 	}
 	return words;
 }
