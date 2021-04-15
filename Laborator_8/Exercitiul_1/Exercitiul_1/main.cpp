@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cctype>
 #include <queue>
+#include <sstream>
 #pragma warning(disable:4996)
 
 class CompareWords {
@@ -19,9 +20,11 @@ public:
 };
 
 void readTextFromFile(std::string &text) {
-	std::ifstream read("date.in");
-	std::istream& getline(std::istream & is, std::string & str);
-	std::getline(read, text);
+	std::ifstream f("date.in");
+	std::stringstream strStream;
+	strStream << f.rdbuf(); //read the file
+	text = strStream.str();
+	f.close();
 
 	std::transform(text.begin(), text.end(), text.begin(), //convert string to lowercase
 		[](unsigned char c) { return std::tolower(c); });
